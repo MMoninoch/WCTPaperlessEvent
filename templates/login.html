@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-light"
+style="font-family: Arial, sans-serif; line-height: 1.6; margin: 20px">
+
+
+    <!-- navbar -->
+
+    <div>
+        <nav
+          class="px-4 py-4 flex justify-between items-center sticky top-0 z-10"
+        >
+          <a
+            class="text-xl font-semibold leading-none text-blue-700 pl-3"
+            href="#"
+          >
+            <p>Paper2Pixel</p>
+          </a>
+          <div class="lg:hidden">
+            <button class="navbar-burger flex items-center text-blue-700 p-3">
+              <svg
+                class="block h-4 w-4 fill-current"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Mobile menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+              </svg>
+            </button>
+          </div>
+          <ul
+            class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6"
+          >
+            <li>
+              <a
+                class="text-sm text-gray-500 hover:text-blue-700"
+                href="/home/homepage/"
+                >Home</a
+              >
+            </li>
+            <li class="text-gray-300">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                class="w-4 h-4 current-fill"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                />
+              </svg>
+            </li>
+            <li>
+              <a class="text-sm text-gray-600 hover:text-blue-700" href="#"
+                >About</a
+              >
+            </li>
+            <li class="text-gray-300">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                class="w-4 h-4 current-fill"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                />
+              </svg>
+            </li>
+            <li>
+              <a
+                class="text-sm text-gray-600 hover:text-blue-700"
+                href="../explore"
+                >Explore</a
+              >
+            </li>
+            <li class="text-gray-300">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                stroke="currentColor"
+                class="w-4 h-4 current-fill"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                />
+              </svg>
+            </li>
+            <li>
+              <a class="text-sm text-gray-600 hover:text-blue-700" href="#"
+                >Contact</a
+              >
+            </li>
+          </ul>
+          <a
+            class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-8 border-2 border-blue-400 text-sm text-gray-900 rounded-xl transition duration-200"
+            href="/users/register_page?raise_exception=true"
+            >Register</a
+          >
+          <a
+            class="hidden lg:inline-block py-2 px-8 bg-blue-700 hover:bg-blue-900 text-sm text-white rounded-xl transition duration-200"
+            href="/events/api/event"
+            >Get Started</a
+          >
+        </nav>
+        <div class="navbar-menu relative z-50 hidden">
+          <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+          <nav
+            class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto"
+          >
+            <div class="flex items-center mb-8">
+              <a
+                class="mr-auto text-xl font-semibold leading-none text-blue-700"
+                href="#"
+              >
+                <p>Paper2Pixel</p>
+              </a>
+              <button class="navbar-close">
+                <svg
+                  class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div>
+              <ul>
+                <li class="mb-1">
+                  <a
+                    class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                    href="/home/homepage/"
+                    >Home</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                    href="#"
+                    >About Us</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                    href="../explore"
+                    >Explore</a
+                  >
+                </li>
+                <li class="mb-1">
+                  <a
+                    class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                    href="#"
+                    >Contact</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="mt-auto">
+              <div class="pt-6">
+                
+                <a
+                  class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none border-2 border-blue-400 hover:bg-gray-200 rounded-xl"
+                  href="/users/register_page?raise_exception=true"
+                  >Register</a
+                >
+                <a
+                  class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-700 hover:bg-blue-900 rounded-xl"
+                  href="/events/api/event"
+                  >Get Started</a
+                >
+              </div>
+              <p class="my-4 text-xs text-center text-gray-400">
+                <span>Copyright ©Paper2Pixel 2023</span>
+              </p>
+            </div>
+          </nav>
+        </div>
+
+
+
+        
+    <!-- signin  -->
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+            <h2 id="form-title" class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+        </div>
+    
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <!-- Sign-in form -->
+            <form id="signin-form" class="space-y-6" action="/auth/token" method="POST">
+                <div>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                    <div class="mt-2">
+                        <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                    </div>
+                </div>
+            
+                <div>
+                    <div class="flex items-center justify-between">
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <div class="text-sm">
+                            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                    </div>
+                </div>
+            
+                <div>
+
+                  <input type="hidden" id="refresh_token" name="refresh_token" required value="your_refresh_token_here">
+            
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+                </div>
+            </form>
+            
+            <p id="toggle-text" class="mt-10 text-center text-sm text-gray-500">
+                <a href="register_page" id="toggle-link" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Not a member?</a>
+            </p>
+            {% if message %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+        <strong class="font-bold">Error!</strong>
+        <span class="block sm:inline">{{ message }}</span>
+      </div>
+    {% endif %}
+        </div>
+    </div>
+
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+      // open
+      const burger = document.querySelectorAll('.navbar-burger');
+      const menu = document.querySelectorAll('.navbar-menu');
+    
+      if (burger.length && menu.length) {
+          for (var i = 0; i < burger.length; i++) {
+              burger[i].addEventListener('click', function() {
+                  for (var j = 0; j < menu.length; j++) {
+                      menu[j].classList.toggle('hidden');
+                  }
+              });
+          }
+      }
+    
+      // close
+      const close = document.querySelectorAll('.navbar-close');
+      const backdrop = document.querySelectorAll('.navbar-backdrop');
+    
+      if (close.length) {
+          for (var i = 0; i < close.length; i++) {
+              close[i].addEventListener('click', function() {
+                  for (var j = 0; j < menu.length; j++) {
+                      menu[j].classList.toggle('hidden');
+                  }
+              });
+          }
+      }
+    
+      if (backdrop.length) {
+          for (var i = 0; i < backdrop.length; i++) {
+              backdrop[i].addEventListener('click', function() {
+                  for (var j = 0; j < menu.length; j++) {
+                      menu[j].classList.toggle('hidden');
+                  }
+              });
+          }
+      }
+    });
+      </script>
+</body>
+</html>
