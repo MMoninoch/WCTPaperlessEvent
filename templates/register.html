@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-light"
+style="font-family: Arial, sans-serif; line-height: 1.6; margin: 20px">
+
+
+    <!-- navbar -->
+
+    
+
+
+
+        
+    <!-- signin  -->
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+            <h2 id="form-title" class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign Up for an Account</h2>
+        </div>
+    
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <!-- Sign-up form -->
+            <form id="signup-form" class="space-y-3" action="/users/register_page" method="POST">
+                <div class="flex space-x-4">
+                    <div class="w-1/2">
+                        <label for="signup-first-name" class="block text-sm font-medium leading-6 text-gray-900 ">First Name</label>
+                        <div class="mt-2">
+                            <input id="signup-first-name" name="first_name" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                        </div>
+                    </div>
+                    <div class="w-1/2">
+                        <label for="signup-last-name" class="block text-sm font-medium leading-6 text-gray-900">Last Name</label>
+                        <div class="mt-2">
+                            <input id="signup-last-name" name="last_name" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="signup-username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                    <div class="mt-2">
+                        <input id="signup-username" name="username" type="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                    </div>
+                </div>
+            
+                <div>
+                    <label for="signup-email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                    <div class="mt-2">
+                        <input id="signup-email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                    </div>
+                </div>
+            
+                <div>
+                    <div class="flex items-center justify-between">
+                        <label for="signup-password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                    </div>
+                    <div class="mt-2">
+                        <input id="signup-password" name="hashed_password" type="password" autocomplete="new-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-3">
+                    </div>
+                </div>
+            
+                <div>
+                    <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
+                </div>
+            </form>
+            
+            <p id="toggle-text" class="mt-10 text-center text-sm text-gray-500">
+                <a href="login_page" id="toggle-link" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Already have an account?</a>
+            </p>
+
+            {% if message %}
+            <div id="error-message-container" style="display: none;" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline">{{ message }}</span>
+              </div>
+{% endif %}
+
+        </div>
+    </div>
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+      // open
+      const burger = document.querySelectorAll('.navbar-burger');
+      const menu = document.querySelectorAll('.navbar-menu');
+    
+      if (burger.length && menu.length) {
+          for (var i = 0; i < burger.length; i++) {
+              burger[i].addEventListener('click', function() {
+                  for (var j = 0; j < menu.length; j++) {
+                      menu[j].classList.toggle('hidden');
+                  }
+              });
+          }
+      }
+    
+      // close
+      const close = document.querySelectorAll('.navbar-close');
+      const backdrop = document.querySelectorAll('.navbar-backdrop');
+    
+      if (close.length) {
+          for (var i = 0; i < close.length; i++) {
+              close[i].addEventListener('click', function() {
+                  for (var j = 0; j < menu.length; j++) {
+                      menu[j].classList.toggle('hidden');
+                  }
+              });
+          }
+      }
+    
+      if (backdrop.length) {
+          for (var i = 0; i < backdrop.length; i++) {
+              backdrop[i].addEventListener('click', function() {
+                  for (var j = 0; j < menu.length; j++) {
+                      menu[j].classList.toggle('hidden');
+                  }
+              });
+          }
+      }
+    });
+      </script>
+</body>
+</html>

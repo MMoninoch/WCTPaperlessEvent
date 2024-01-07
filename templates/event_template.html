@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Details: {{ event.event_name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-light"
+    style="font-family: Arial, sans-serif; line-height: 1.6; margin: 20px"
+  >
+
+  
+
+  <div class="container mx-auto mt-24">
+    <div class="grid gap-x-24 sm:grid-cols-1 md:grid-cols-2">
+        <div class="flex items-center overflow-hidden rounded-lg" style="height: 500px;">
+            <img
+            src="/events/api/events/{{ event.title }}/image" alt="Event Image"
+                style="width: 100%; height: 100%; object-fit: cover; object-position: center center;"
+            >
+        </div>
+        <div class="flex flex-col justify-center p-3">
+            <a href="#">
+                <h5 class="mb-4 text-5xl font-bold text-gray-900">
+                    {{ event.title }}
+                </h5>
+            </a>
+            <h5 class="mb-5 text-md font-light tracking-tight text-gray-900">
+                Event Date: {{ event.date_time }}
+            </h5>
+            <h5 class="mb-5 text-md font-light tracking-tight text-gray-900">
+                Event Location: {{ event.location }}
+            </h5>
+            <p class="mb-8 font-normal text-gray-700">
+                {{ event.description }}
+            </p>
+            <div class="flex items-center">
+                <a href="#" onclick="generateQRCode('{{ event.title }}')" class="inline-flex items-center px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                    Join Event
+                    <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ticket-container" class="hidden container mx-auto flex-col justify-center items-center text-center">
+    <h2 id="ticket-title" class="text-2xl font-bold mt-20">Your Event Ticket</h2>
+    <div id="qrcode-container" class="hidden container flex justify-center items-center mx-auto mt-10 text-center">
+        <!-- The QR code will be generated inside this container -->
+    </div>
+</div>
+
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+
+    <script>
+        function generateQRCode(eventTitle) {
+            // Get the container elements
+            var ticketContainer = document.getElementById('ticket-container');
+            var ticketTitle = document.getElementById('ticket-title');
+            var qrcodeContainer = document.getElementById('qrcode-container');
+    
+            // Clear any existing content in the QR code container
+            qrcodeContainer.innerHTML = '';
+    
+            // Create a QRCode instance with a larger size
+            var qrcode = new QRCode(qrcodeContainer, {
+                text: eventTitle,
+                width: 200, // Adjust the width as needed
+                height: 200, // Adjust the height as needed
+            });
+    
+            // Display the ticket container
+            ticketContainer.classList.remove('hidden');
+            // Display the QR code container
+            qrcodeContainer.classList.remove('hidden');
+        }
+    </script>
+    
+    
+  </body>
+
+  
+</html>

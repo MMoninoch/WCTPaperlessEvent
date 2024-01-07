@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Submission Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-light" style="font-family: Arial, sans-serif; line-height: 1.6; margin: 20px;">
+
+  
+
+    <div class="container mx-auto mt-24">
+      <div class="lg:mx-48">
+      <h2 class="mb-4 text-3xl font-bold">Event Submission Form</h2>
+  
+      <form id="eventForm" method="post" action="/events/api/events/" enctype="multipart/form-data">
+        <div class="mb-4">
+            <label for="eventName" class="block text-sm font-medium text-gray-700">Event Name:</label>
+            <input type="text" class="mt-1 p-2 w-full border rounded-md" id="eventName" name="event_name" required>
+        </div>
+    
+        <div class="mb-4">
+            <label for="eventDate" class="block text-sm font-medium text-gray-700">Date and Time:</label>
+            <input type="datetime-local" class="mt-1 p-2 w-full border rounded-md" id="eventDate" name="event_datetime" required>
+        </div>
+    
+        <div class="mb-4">
+            <label for="eventLocation" class="block text-sm font-medium text-gray-700">Location:</label>
+            <input type="text" class="mt-1 p-2 w-full border rounded-md" id="eventLocation" name="event_location" required>
+        </div>
+    
+        <div class="mb-4">
+            <label for="eventDescription" class="block text-sm font-medium text-gray-700">Description:</label>
+            <textarea class="mt-1 p-2 w-full border rounded-md" id="eventDescription" name="event_description" required></textarea>
+        </div>
+    
+        <div class="mb-4">
+            <label for="eventPhoto" class="block text-sm font-medium text-gray-700">Upload Photo:</label>
+            <input type="file" class="mt-1 w-full border rounded-md" id="eventPhoto" name="event_photo" accept="image/*" required>
+        </div>
+    
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Submit Event
+        </button>
+    </form>
+    
+    
+    
+    </div>
+  </div>
+  
+
+
+
+
+</body>
+</html>

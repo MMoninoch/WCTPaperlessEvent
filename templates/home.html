@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paper2Pixel Event</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .hidden-content {
+        display: none;
+      }
+      .active-button {
+        background-color: rgb(
+          7,
+          62,
+          134
+        ); /* Change this to the desired color */
+        color: #fff; /* Change this to the desired text color */
+      }
+      .active-button h2 {
+        color: #fff;
+      }
+      h2 {
+        font-size: small;
+      }
+    </style>
+  </head>
+
+  <body class="bg-light font-sans" style="line-height: 1.6; margin: 20px">
+    <!-- Navbar for not logged in -->
+    <div>
+      <nav
+        class="px-4 py-4 flex justify-between items-center sticky top-0 z-10"
+      >
+        <a
+          class="text-xl font-semibold leading-none text-blue-700 pl-3"
+          href="#"
+        >
+          <p>Paper2Pixel</p>
+        </a>
+        <div class="lg:hidden">
+          <button class="navbar-burger flex items-center text-blue-700 p-3">
+            <svg
+              class="block h-4 w-4 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Mobile menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+          </button>
+        </div>
+        <ul
+          class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6"
+        >
+          <li>
+            <a
+              class="text-sm text-gray-500 hover:text-blue-700"
+              href="/home/homepage/"
+              >Home</a
+            >
+          </li>
+          <li class="text-gray-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              class="w-4 h-4 current-fill"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+              />
+            </svg>
+          </li>
+          <li>
+            <a class="text-sm text-gray-600 hover:text-blue-700" href="#"
+              >About</a
+            >
+          </li>
+          <li class="text-gray-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              class="w-4 h-4 current-fill"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+              />
+            </svg>
+          </li>
+          <li>
+            <a
+              class="text-sm text-gray-600 hover:text-blue-700"
+              href="../explore"
+              >Explore</a
+            >
+          </li>
+          <li class="text-gray-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              class="w-4 h-4 current-fill"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+              />
+            </svg>
+          </li>
+          <li>
+            <a class="text-sm text-gray-600 hover:text-blue-700" href="#"
+              >Contact</a
+            >
+          </li>
+        </ul>
+        
+        <a
+          class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-8"
+          >
+          <img class="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 img-fluid" src="data:image/jpeg;base64,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" alt="Bordered avatar">
+          </a
+        >
+        <a
+          class="hidden lg:inline-block py-3 px-10 bg-blue-700 hover:bg-blue-900 text-sm text-white rounded-xl transition duration-200"
+          href="/events/api/event"
+          >Get Started</a
+        >
+
+      </nav>
+      <div class="navbar-menu relative z-50 hidden">
+        <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+        <nav
+          class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto"
+        >
+          <div class="flex items-center mb-8">
+            <a
+              class="mr-auto text-xl font-semibold leading-none text-blue-700"
+              href="#"
+            >
+              <p>Paper2Pixel</p>
+            </a>
+            <button class="navbar-close">
+              <svg
+                class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div>
+            <ul>
+              <li class="mb-1">
+                <a
+                  class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                  href="/home/homepage/"
+                  >Home</a
+                >
+              </li>
+              <li class="mb-1">
+                <a
+                  class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                  href="#"
+                  >About Us</a
+                >
+              </li>
+              <li class="mb-1">
+                <a
+                  class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                  href="../explore"
+                  >Explore</a
+                >
+              </li>
+              <li class="mb-1">
+                <a
+                  class="block p-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded"
+                  href="#"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="mt-auto">
+            <div class="pt-6">
+              <a
+                class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-700 hover:bg-blue-900 rounded-xl"
+                href="/events/api/event"
+                >Get Started</a
+              >
+            </div>
+            <p class="my-4 text-xs text-center text-gray-400">
+              <span>Copyright ©Paper2Pixel 2023</span>
+            </p>
+          </div>
+        </nav>
+      </div>
+
+      <!-- hero  -->
+      <div class="px-6 lg:px-8 h-screen scroll-smooth">
+        <div
+          class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          aria-hidden="true"
+        >
+          <div
+            class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#96c0f8] to-[#0a56e4] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style="
+              clip-path: polygon(
+                74.1% 44.1%,
+                100% 61.6%,
+                97.5% 26.9%,
+                85.5% 0.1%,
+                80.7% 2%,
+                72.5% 32.5%,
+                60.2% 62.4%,
+                52.4% 68.1%,
+                47.5% 58.3%,
+                45.2% 34.5%,
+                27.5% 76.7%,
+                0.1% 64.9%,
+                17.9% 100%,
+                27.6% 76.8%,
+                76.1% 97.7%,
+                74.1% 44.1%
+              );
+            "
+          ></div>
+        </div>
+        <div class="mx-auto max-w-3xl py-32 sm:py-48 lg:py-56">
+          <div class="text-center">
+            <h1
+              class="text-6xl font-bold tracking-tight text-gray-900 sm:text-8xl"
+            >
+              Unlock the <br />
+              Future of Events
+            </h1>
+            <p class="mt-6 text-md leading-8 text-gray-500">
+              Join Us in Going Paperless and Embrace a Sustainable Tomorrow
+            </p>
+
+            <div class="max-w-2xl mx-auto mt-9">
+              <form class="flex items-center" id="search-form">
+                <label for="voice-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                  <div
+                    class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+                  ></div>
+                  <input
+                    type="text"
+                    id="voice-search"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-700 focus:border-blue-700 block w-full pl-10 p-4"
+                    placeholder="Search for Events"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="inline-flex items-center py-4 px-5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                >
+                  <svg
+                    class="mr-2 -ml-1 w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    ></path>
+                  </svg>
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          aria-hidden="true"
+        >
+          <div
+            class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#96c0f8] to-[#0a56e4] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            style="
+              clip-path: polygon(
+                74.1% 44.1%,
+                100% 61.6%,
+                97.5% 26.9%,
+                85.5% 0.1%,
+                80.7% 2%,
+                72.5% 32.5%,
+                60.2% 62.4%,
+                52.4% 68.1%,
+                47.5% 58.3%,
+                45.2% 34.5%,
+                27.5% 76.7%,
+                0.1% 64.9%,
+                17.9% 100%,
+                27.6% 76.8%,
+                76.1% 97.7%,
+                74.1% 44.1%
+              );
+            "
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event  -->
+
+    <div class="container mx-auto mt-9 mb-64">
+      <div class="mb-20">
+        <h1
+          class="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl text-center"
+        >
+          Discover What's Next
+        </h1>
+        <p class="mt-6 text-center text-gray-500">
+          Explore Our Spotlighted Upcoming Events from Visionary Hosts
+        </p>
+      </div>
+      <div class="grid gap-y-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {% for event in events %}
+        <div
+          class="mx-auto w-4/5 bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-blue-500/50 hover:scale-105 transition duration-300 ease-in-out"
+        >
+          <div class="overflow-hidden rounded-t-lg" style="height: 300px">
+            <a href="/events/api/events/{{ event.title }}">
+              <img
+                src="/events/api/events/{{ event.title }}/image"
+                alt="Event Image"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  object-position: center center;
+                "
+              />
+            </a>
+          </div>
+          <div class="p-3">
+            <a href="#">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                {{ event.title }}
+              </h5>
+            </a>
+            <h5 class="mb-2 text-md font-light tracking-tight text-gray-900">
+              {{ event.date_time }}
+            </h5>
+            <h5 class="mb-2 text-md font-light tracking-tight text-gray-900">
+              {{ event.location }}
+            </h5>
+            <p class="mb-3 font-normal text-gray-700">
+              {{ event.description }}
+            </p>
+            <a
+              href="/events/api/events/{{ event.title }}"
+              class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+            >
+              Read more
+              <svg
+                class="w-3.5 h-3.5 ml-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 10"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="pagination mt-16 text-center">
+        <!-- Apply text-center here -->
+        {% if events|length > 0 %}
+        <div class="inline-block">
+          <!-- Wrap the button in an inline-block container -->
+          <a
+            href="?page={{ page + 1 }}"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+          >
+            Load More
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Testimonial  -->
+    <section>
+      <div
+        class="container-fluid mx-auto px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24"
+      >
+        <div
+          class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16"
+        >
+          <div class="max-w-xl">
+            <h2
+              class="font-semibold tracking-tight text-3xl text-gray-900 sm:text-5xl text-left pl-5"
+            >
+              What our clients say...
+            </h2>
+
+            <p class="mt-4 text-gray-500 text-left font-normal pl-5">
+              Testimonials from our attendees speak volumes about the unique and
+              incredible moments they've had at our events. Join us and create
+              your own story!
+            </p>
+
+            <div class="hidden lg:mt-8 lg:flex lg:gap-4 pl-5">
+              <button
+                aria-label="Previous slide"
+                id="keen-slider-previous-desktop"
+                class="rounded-full border border-blue-700 p-3 text-blue-700 transition hover:bg-blue-900 hover:text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-5 w-5 rtl:rotate-180"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 19.5L8.25 12l7.5-7.5"
+                  ></path>
+                </svg>
+              </button>
+
+              <button
+                aria-label="Next slide"
+                id="keen-slider-next-desktop"
+                class="rounded-full border border-blue-700 p-3 text-blue-700 transition hover:bg-blue-900 hover:text-white"
+              >
+                <svg
+                  class="h-5 w-5 rtl:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 5l7 7-7 7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="-mx-6 lg:col-span-2 lg:mx-0">
+            <div id="keen-slider" class="keen-slider">
+              <div
+                class="keen-slider__slide border-2 rounded-lg border-blue-700"
+              >
+                <blockquote
+                  class="flex h-full flex-col justify-between p-6 shadow-sm sm:p-8 lg:p-12"
+                >
+                  <div>
+                    <div class="flex gap-0.5 text-yellow-500">
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+                    </div>
+
+                    <div class="mt-4">
+                      <p
+                        class="text-2xl font-semibold text-blue-800 sm:text-3xl"
+                      >
+                        Megan Turner
+                      </p>
+
+                      <p class="mt-4 leading-relaxed text-gray-600 font-normal">
+                        "The gaming convention was a gamer's dream – I was blown
+                        away by the new game releases and the incredible cosplay
+                        competition. Meeting gamers and developers made it
+                        unforgettable."
+                      </p>
+                    </div>
+                  </div>
+
+                  <footer
+                    class="mt-4 text-sm font-medium text-gray-700 sm:mt-6"
+                  >
+                    &mdash; Gamer and Cosplayer
+                  </footer>
+                </blockquote>
+              </div>
+
+              <div
+                class="keen-slider__slide border-2 rounded-lg border-blue-700"
+              >
+                <blockquote
+                  class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12"
+                >
+                  <div>
+                    <div class="flex gap-0.5 text-yellow-500">
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+                    </div>
+
+                    <div class="mt-4">
+                      <p
+                        class="text-2xl font-semibold text-blue-800 sm:text-3xl"
+                      >
+                        Daniel Martinez
+                      </p>
+
+                      <p class="mt-4 leading-relaxed text-gray-700">
+                        "Competing in the tournament was intense and thrilling.
+                        The organization, the competition, and the audience made
+                        it a memorable experience. It's a great platform for
+                        serious gamers to showcase their skills."
+                      </p>
+                    </div>
+                  </div>
+
+                  <footer
+                    class="mt-4 text-sm font-medium text-gray-700 sm:mt-6"
+                  >
+                    &mdash; Esports Competitor
+                  </footer>
+                </blockquote>
+              </div>
+
+              <div
+                class="keen-slider__slide border-2 rounded-lg border-blue-700"
+              >
+                <blockquote
+                  class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12"
+                >
+                  <div>
+                    <div class="flex gap-0.5 text-yellow-500">
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        ></path>
+                      </svg>
+                    </div>
+
+                    <div class="mt-4">
+                      <p
+                        class="text-2xl font-semibold text-blue-800 sm:text-3xl"
+                      >
+                        David Garcia
+                      </p>
+
+                      <p class="mt-4 leading-relaxed text-gray-700">
+                        "I've been to many parties, but this one was an absolute
+                        blast! The energy, the music, and the atmosphere were
+                        off the charts. I met so many fun and friendly people.
+                        Can't wait for the next one!"
+                      </p>
+                    </div>
+                  </div>
+
+                  <footer
+                    class="mt-4 text-sm font-medium text-gray-700 sm:mt-6"
+                  >
+                    &mdash; Party Enthusiast
+                  </footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex justify-center gap-4 lg:hidden">
+          <button
+            aria-label="Previous slide"
+            id="keen-slider-previous"
+            class="rounded-full border border-blue-700 p-3 text-blue-700 transition hover:bg-blue-900 hover:text-white"
+          >
+            <svg
+              class="h-5 w-5 -rotate-180 transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 5l7 7-7 7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </button>
+
+          <button
+            aria-label="Next slide"
+            id="keen-slider-next"
+            class="rounded-full border border-blue-700 p-3 text-blue-700 transition hover:bg-blue-900 hover:text-white"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 5l7 7-7 7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-40 mt-56">
+      <div class="container max-w-4xl px-6 py-10 mx-auto">
+        <h1 class="text-5xl font-semibold text-left text-gray-800 lg:text-6xl">
+          FAQs
+        </h1>
+        <p class="text-sm font-normal text-left mt-7">
+          Got questions? We've got answers. Explore our frequently asked
+          questions to find the information you need about our event. If you
+          can't find what you're looking for, feel free to reach out to us for
+          further assistance.
+        </p>
+
+        <div class="mt-7 space-y-8">
+          <div class="border-2 border-gray-100 rounded-lg">
+            <button
+              class="flex items-center justify-between w-full p-8 toggle-button round-t-lg"
+            >
+              <h2 class="font-semibold text-gray-700 title text-left">
+                Are tickets refundable if I can't attend?
+              </h2>
+
+              <span class="text-white bg-blue-800 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18 12H6"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div class="border-t border-gray-200"></div>
+
+            <div
+              class="p-8 text-sm text-white hidden-content active-button rounded-b-lg text-left"
+            >
+              While tickets are generally non-refundable, we understand that
+              plans change. Contact our support team, and we'll do our best to
+              assist you.
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 space-y-8">
+          <div class="border-2 border-gray-100 rounded-lg">
+            <button
+              class="flex items-center justify-between w-full p-8 toggle-button round-t-lg"
+            >
+              <h2 class="font-semibold text-gray-700 title text-left">
+                Is the event family-friendly?
+              </h2>
+
+              <span class="text-white bg-blue-800 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18 12H6"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div class="border-t border-gray-200"></div>
+
+            <div
+              class="p-8 text-sm text-white hidden-content active-button rounded-b-lg"
+            >
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
+              eaque nobis, fugit odit omnis fugiat deleniti animi ab maxime cum
+              laboriosam recusandae facere dolorum veniam quia pariatur
+              obcaecati illo ducimus?
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 space-y-8">
+          <div class="border-2 border-gray-100 rounded-lg">
+            <button
+              class="flex items-center justify-between w-full p-8 toggle-button round-t-lg"
+            >
+              <h2 class="font-semibold text-gray-700 title text-left">
+                Can I bring my own gaming gear to the event?
+              </h2>
+
+              <span class="text-white bg-blue-800 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18 12H6"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div class="border-t border-gray-200"></div>
+
+            <div
+              class="p-8 text-sm text-white hidden-content active-button rounded-b-lg text-left"
+            >
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
+              eaque nobis, fugit odit omnis fugiat deleniti animi ab maxime cum
+              laboriosam recusandae facere dolorum veniam quia pariatur
+              obcaecati illo ducimus?
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 space-y-8">
+          <div class="border-2 border-gray-100 rounded-lg">
+            <button
+              class="flex items-center justify-between w-full p-8 toggle-button round-t-lg"
+            >
+              <h2 class="font-semibold text-gray-700 title text-left">
+                How can I get updates and notifications about the event?
+              </h2>
+
+              <span class="text-white bg-blue-800 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18 12H6"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+
+            <div class="border-t border-gray-200"></div>
+
+            <div
+              class="p-8 text-sm text-white hidden-content active-button rounded-b-lg"
+            >
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
+              eaque nobis, fugit odit omnis fugiat deleniti animi ab maxime cum
+              laboriosam recusandae facere dolorum veniam quia pariatur
+              obcaecati illo ducimus?
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer  -->
+    <footer class="border-t-2">
+      <div
+        class="container-fluid mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8"
+      >
+        <div class="md:flex md:justify-between">
+          <div class="mb-6 md:mb-0">
+            <a
+              class="text-xl font-semibold leading-none text-blue-700 pl-3"
+              href="#"
+            >
+              <p>EcoVite</p>
+            </a>
+          </div>
+          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            <div>
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                Resources
+              </h2>
+              <ul class="text-gray-500 font-medium">
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">Home</a>
+                </li>
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">About</a>
+                </li>
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">Explore</a>
+                </li>
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">Contact</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                Follow us
+              </h2>
+              <ul class="text-gray-500 font-medium">
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">Facebook</a>
+                </li>
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">Instagram</a>
+                </li>
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">Twitter</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                Legal
+              </h2>
+              <ul class="text-gray-500font-medium">
+                <li class="mb-4">
+                  <a href="#" class="hover:underline">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center"
+            >© 2023
+            <a href="https://flowbite.com/" class="hover:underline">EcoVite</a>.
+            All Rights Reserved.
+          </span>
+          <div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
+            <a href="#" class="text-gray-500 hover:text-gray-900">
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 8 19"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="sr-only">Facebook page</span>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-gray-900">
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 21 16"
+              >
+                <path
+                  d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"
+                />
+              </svg>
+              <span class="sr-only">Discord community</span>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-gray-900">
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 17"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="sr-only">Twitter page</span>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-gray-900">
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="sr-only">GitHub account</span>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-gray-900">
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 0a10 10 0 1 0 10 10A10.009 10.009 0 0 0 10 0Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.094 20.094 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM8 1.707a8.821 8.821 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.758 45.758 0 0 0 8 1.707ZM1.642 8.262a8.57 8.57 0 0 1 4.73-5.981A53.998 53.998 0 0 1 9.54 7.222a32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.64 31.64 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM10 18.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 13.113 11a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="sr-only">Dribbble account</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+
+  <script>
+    // navar
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // open
+      const burger = document.querySelectorAll(".navbar-burger");
+      const menu = document.querySelectorAll(".navbar-menu");
+
+      if (burger.length && menu.length) {
+        for (var i = 0; i < burger.length; i++) {
+          burger[i].addEventListener("click", function () {
+            for (var j = 0; j < menu.length; j++) {
+              menu[j].classList.toggle("hidden");
+            }
+          });
+        }
+      }
+
+      // close
+      const close = document.querySelectorAll(".navbar-close");
+      const backdrop = document.querySelectorAll(".navbar-backdrop");
+
+      if (close.length) {
+        for (var i = 0; i < close.length; i++) {
+          close[i].addEventListener("click", function () {
+            for (var j = 0; j < menu.length; j++) {
+              menu[j].classList.toggle("hidden");
+            }
+          });
+        }
+      }
+
+      if (backdrop.length) {
+        for (var i = 0; i < backdrop.length; i++) {
+          backdrop[i].addEventListener("click", function () {
+            for (var j = 0; j < menu.length; j++) {
+              menu[j].classList.toggle("hidden");
+            }
+          });
+        }
+      }
+    });
+
+    // navar
+  </script>
+
+  <script type="module">
+    import KeenSlider from "https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm";
+
+    const keenSlider = new KeenSlider(
+      "#keen-slider",
+      {
+        loop: true,
+        slides: {
+          origin: "center",
+          perView: 1.25,
+          spacing: 16,
+        },
+        breakpoints: {
+          "(min-width: 1024px)": {
+            slides: {
+              origin: "auto",
+              perView: 1.5,
+              spacing: 32,
+            },
+          },
+        },
+      },
+      []
+    );
+
+    const keenSliderPrevious = document.getElementById("keen-slider-previous");
+    const keenSliderNext = document.getElementById("keen-slider-next");
+
+    const keenSliderPreviousDesktop = document.getElementById(
+      "keen-slider-previous-desktop"
+    );
+    const keenSliderNextDesktop = document.getElementById(
+      "keen-slider-next-desktop"
+    );
+
+    keenSliderPrevious.addEventListener("click", () => keenSlider.prev());
+    keenSliderNext.addEventListener("click", () => keenSlider.next());
+
+    keenSliderPreviousDesktop.addEventListener("click", () =>
+      keenSlider.prev()
+    );
+    keenSliderNextDesktop.addEventListener("click", () => keenSlider.next());
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleButtons = document.querySelectorAll(".toggle-button");
+
+      toggleButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const content = button.nextElementSibling.nextElementSibling; // Get the next sibling element, which is the content
+
+          // Close all other FAQ items before opening the clicked one and remove active class
+          toggleButtons.forEach((otherButton) => {
+            const otherContent =
+              otherButton.nextElementSibling.nextElementSibling;
+            if (otherButton !== button) {
+              otherContent.classList.add("hidden-content");
+              otherButton.classList.remove("active-button");
+            }
+          });
+
+          content.classList.toggle("hidden-content"); // Toggle the "hidden-content" class for the clicked item
+          button.classList.toggle("active-button"); // Toggle the "active-button" class for the clicked button
+        });
+      });
+    });
+  </script>
+
+  <script>
+    const searchForm = document.getElementById("search-form");
+    const searchInput = document.getElementById("voice-search");
+    const searchResults = document.getElementById("search-results");
+
+    searchForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm) {
+        // Redirect to the search results page
+        window.location.href = `/events/api/events/${searchTerm}`;
+      }
+    });
+
+    searchInput.addEventListener("input", async function () {
+      const searchTerm = searchInput.value.trim();
+
+      if (searchTerm) {
+        // Fetch search suggestions from the server
+        const response = await fetch(`/api/search?term=${searchTerm}`);
+        const data = await response.json();
+
+        // Display the suggestions
+        displaySearchResults(data);
+      } else {
+        // Clear the suggestions
+        clearSearchResults();
+      }
+    });
+
+    function displaySearchResults(results) {
+      // Clear existing results
+      clearSearchResults();
+
+      // Append new results to the list
+      results.forEach((result) => {
+        const li = document.createElement("li");
+        li.textContent = result.event_name;
+
+        li.addEventListener("click", function () {
+          // Redirect to the selected event
+          window.location.href = `/events/events/api/events/${result.event_name}`;
+        });
+
+        searchResults.appendChild(li);
+      });
+    }
+
+    function clearSearchResults() {
+      // Clear the list of results
+      searchResults.innerHTML = "";
+    }
+  </script>
+</html>
